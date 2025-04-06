@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="EduQuery Pro - AI-powered PDF question generator for creating interactive learning experiences">
+    <meta name="keywords" content="PDF, questions, education, learning, AI, quiz, MCQ, study">
+    <title>EduQuery Pro - AI-Powered PDF Question Generator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.svg') }}" type="image/svg+xml">
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <i class="fas fa-brain"></i>
+                    <span class="company-name">EduQuery Pro</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><i class="fas fa-home"></i> Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><i class="fas fa-book"></i> Features</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><i class="fas fa-question-circle"></i> Help</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-primary login-btn" href="#"><i class="fas fa-sign-in-alt"></i> Sign In</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container main-content">
+        <section class="hero-section text-center">
+            <div class="hero-content text-center">
+                <p class="lead mb-4 display-5">
+                    <span class="animated-text" id="inputType">Upload PDF</span> to get questions and answers generated from the content using AI.
+                </p>
+                <div class="cta-buttons mt-4">
+                    <form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data">
+                        <div class="upload-container">
+                            <div class="input-type-selector mb-3">
+                                <button type="button" id="pdfButton" class="btn btn-lg btn-outline-primary active me-3">
+                                    <i class="fas fa-file-pdf"></i> Upload PDF
+                                </button>
+                                <button type="button" id="textButton" class="btn btn-lg btn-outline-primary">
+                                    <i class="fas fa-keyboard"></i> Enter Text
+                                </button>
+                            </div>
+                            <div id="pdfSection">
+                                <input id="pdfFile" class="file-input" type="file" name="file" accept=".pdf" hidden>
+                                <div class="drop-zone" id="dropZone">
+                                    <div class="drop-zone-content" id="dropZoneContent">
+                                        <i class="fas fa-cloud-upload-alt fa-3x mb-3"></i>
+                                        <p class="mb-2">Drag & Drop your PDF here</p>
+                                        <p class="small text-muted">or</p>
+                                        <button type="button" id="browse-btn" class="btn btn-primary"><i class="fas fa-file-pdf"></i> Browse Files</button>
+                                    </div>
+                                    <div class="file-info" id="fileInfo" style="display: none;">
+                                        <i class="fas fa-file-pdf fa-2x mb-2"></i>
+                                        <p id="filename" class="mb-1"></p>
+                                        <button type="button" id="removeFile" class="btn btn-sm btn-outline-danger"><i class="fas fa-times"></i> Remove</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="textSection" style="display: none;">
+                                <div class="mb-3">
+                                    <textarea class="form-control" id="textInput" name="text" rows="8" placeholder="Enter your text here..."></textarea>
+                                </div>
+                            </div>
+                            <button id="uploadBtn" class="btn btn-primary btn-lg mt-3" type="submit"><i class="fas fa-upload"></i> Generate Questions</button>
+                            <div id="upload-status" class="mt-3"></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <section id="loading" class="text-center">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <p class="mt-2">Generating questions...</p>
+        </section>
+
+        <section id="error" class="alert alert-danger" role="alert"></section>
+
+        <section id="questions-container">
+            <div id="topic-tags" class="mb-4"></div>
+            <div id="questions"></div>
+        </section>
+    </main>
+
+    <footer class="footer mt-5 py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>EduQuery Pro</h5>
+                    <p>AI-powered PDF question generator for creating interactive learning experiences.</p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">Help</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Connect</h5>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center">
+                <p>&copy; 2025 EduQuery Pro. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <style>
+        /* Add these styles to your existing CSS */
+        .animated-text {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96c93d);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradient 3s ease infinite;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .lead.display-5 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            line-height: 1.4;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+    </style>
+    <script>
+        // Add this to your existing JavaScript
+        const inputTypes = ['Upload PDF', 'Upload text'];
+        let currentIndex = 0;
+
+        function updateText() {
+            const element1 = document.getElementById('inputType');
+            element1.textContent = inputTypes[currentIndex];
+            currentIndex = (currentIndex + 1) % inputTypes.length;
+        }
+
+        // Update text every 2 seconds
+        setInterval(updateText, 2000);
+    </script>
+</body>
+</html>
