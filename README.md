@@ -1,11 +1,11 @@
-# PDF Question Generator
+# EduQuery Pro
 
 [![Python](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org/downloads/)
 [![Flask](https://img.shields.io/badge/Flask-2.0.1-green)](https://flask.palletsprojects.com/)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Hugging Face](https://img.shields.io/badge/Hugging%20Face-GPT--2-orange)](https://huggingface.co/gpt2)
 
-A Flask-based web application that generates multiple-choice questions from text or PDF documents using AI.
+A Flask-based web application named Edu Query Pro that generates multiple-choice questions from text or PDF documents using AI.
 
 ## 🌟 Features
 
@@ -94,6 +94,30 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📞 Support
 
 If you have any questions or run into issues, please open an issue in the GitHub repository.
+
+## 🚀 Potential Improvements
+
+Here are some areas where the PDF Question Generator could be enhanced:
+
+1. **Question Generation Algorithm**:
+   - Improve the quality and relevance of generated questions
+   - Add support for different question types (true/false, fill-in-the-blank, etc.)
+   - Implement better distractor generation for multiple-choice questions
+
+2. **Customization Options**:
+   - Allow users to specify difficulty levels
+   - Add topic-based question generation
+   - Enable users to set the number of questions to generate
+
+3. **User Interface Enhancements**:
+   - Improve the PDF upload and text input experience
+   - Add question review and editing capabilities
+   - Implement a progress tracker for question generation
+
+4. **Technical Improvements**:
+   - Add support for larger PDF files
+   - Implement better error handling and user feedback
+   - Optimize the question generation process for faster response times
 
 ## Project Structure
 
