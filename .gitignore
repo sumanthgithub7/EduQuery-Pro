@@ -1,5 +1,23 @@
-# Python
+# Python cache
 __pycache__/
+*.pyc
+
+# Environment
+.env
+venv/
+
+# Uploads folder (temporary files)
+uploads/
+
+# IDE
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Python
 *.py[cod]
 *$py.class
 *.so
@@ -21,21 +39,11 @@ wheels/
 *.egg
 
 # Virtual Environment
-venv/
 ENV/
-env/
-.env
 
 # IDE
-.idea/
-.vscode/
 *.swp
 *.swo
 
-# OS
-.DS_Store
-Thumbs.db
-
 # Project specific
-backend/uploads/
 *.log 
